@@ -3,10 +3,7 @@ import type { AppProps } from 'next/app';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider } from 'styled-components';
 import GlobalStyle from '../styles/globalStyles';
-
-const theme = {
-  primary: '#505050',
-};
+import theme from '../styles/theme';
 
 const App = (props: AppProps) => {
   const { Component, pageProps } = props;

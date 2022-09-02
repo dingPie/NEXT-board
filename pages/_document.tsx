@@ -1,18 +1,24 @@
 import { ServerStyleSheets } from '@mui/styles';
-import Document, { DocumentContext, DocumentInitialProps } from 'next/document';
+import Document, {
+  DocumentContext,
+  DocumentInitialProps,
+  Head,
+  Html,
+  Main,
+  NextScript,
+} from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
 
 class MyDocument extends Document {
   render() {
     return (
-      <></>
-      // <Html>
-      //   <body>
-      //     <Head></Head>
-      //     <Main />
-      //     <NextScript />
-      //   </body>
-      // </Html>
+      <Html>
+        <body>
+          <Head></Head>
+          <Main />
+          <NextScript />
+        </body>
+      </Html>
     );
   }
 }
@@ -36,8 +42,8 @@ export const getInitialProps = async (
       ...initialProps,
       styles: (
         <>
-          {sheet.getStyleElement()}
           {initialProps.styles}
+          {sheet.getStyleElement()}
         </>
       ),
     };

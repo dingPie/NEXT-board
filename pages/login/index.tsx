@@ -1,6 +1,7 @@
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import LoginComponent from '../../components/login/LoginComponent';
+import { ColBox } from '../../components/styled_components/FlexBox';
 import useInput from '../../utils/hooks/useInput';
 
 const Index: NextPage = () => {
@@ -11,7 +12,7 @@ const Index: NextPage = () => {
   const onClickJoinBtn = () => router.push('/login/join');
 
   return (
-    <>
+    <ColBox>
       <LoginComponent
         email={email}
         onChangeEmail={onChangeEmail}
@@ -19,7 +20,7 @@ const Index: NextPage = () => {
         onChangePw={onChangePw}
         onClickJoinBtn={onClickJoinBtn}
       />
-    </>
+    </ColBox>
   );
 };
 

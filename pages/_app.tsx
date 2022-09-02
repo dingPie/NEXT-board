@@ -5,15 +5,29 @@ import { ThemeProvider } from 'styled-components';
 import GlobalStyle from '../styles/globalStyles';
 import theme from '../styles/theme';
 
-const App = (props: AppProps) => {
-  const { Component, pageProps } = props;
+import { NextPage } from 'next/types';
+import { ReactElement, ReactNode } from 'react';
+import Layout from '../components/Layout';
+
+// NextPage 의 타입과 (page: ReactElement) => ReactNode의 타입 결합
+export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
+  getLayout?: (page: ReactElement) => ReactNode;
+};
+
+// import 한 AppProps의 타입과 NextPageWithLayout의 타입 결합
+export type AppPropsWithLayout = AppProps & {
+  Component: NextPageWithLayout;
+};
+
+const App = ({ Component, pageProps }: AppPropsWithLayout) => {
+  const getLayout = Component.getLayout ?? (page => page);
 
   return (
     <>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         <CssBaseline />
-        <Component {...pageProps} />
+        <Layout>{getLayout(<Component {...pageProps} />)}</Layout>
       </ThemeProvider>
     </>
   );

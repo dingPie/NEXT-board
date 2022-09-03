@@ -1,13 +1,13 @@
 import { ChangeEvent } from 'react';
 import { Button } from '@mui/material';
-import InputPw from '../../components/hooks_components/InputPw';
-import InputText from '../../components/hooks_components/InputText';
-import { ColBox, RowBox } from '../../components/styled_components/FlexBox';
-import Text from '../../components/styled_components/Text';
+import InputPw from '../hooks_components/InputPw';
+import InputText from '../hooks_components/InputText';
+import { ColBox, RowBox } from '../styled_components/FlexBox';
+import Text from '../styled_components/Text';
 
 interface ILoginComponent {
-  email: string;
-  onChangeEmail: (
+  userId: string;
+  onChangeUserId: (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => void;
   pw: string;
@@ -16,8 +16,8 @@ interface ILoginComponent {
 }
 
 const LoginComponent = ({
-  email,
-  onChangeEmail,
+  userId,
+  onChangeUserId,
   pw,
   onChangePw,
   onClickJoinBtn,
@@ -33,14 +33,19 @@ const LoginComponent = ({
           <Text fontSize="l" bold>
             아이디
           </Text>
-          <InputText value={email} onChange={onChangeEmail} radius={0.25} />
+          <InputText
+            shadow
+            value={userId}
+            onChange={onChangeUserId}
+            radius={0.25}
+          />
         </ColBox>
 
         <ColBox>
           <Text fontSize="l" bold>
             비밀번호
           </Text>
-          <InputPw value={pw} onChange={onChangePw} radius={0.25} />
+          <InputPw shadow value={pw} onChange={onChangePw} radius={0.25} />
         </ColBox>
 
         <RowBox>

@@ -6,7 +6,7 @@ import useInput from '../../utils/hooks/useInput';
 
 const Index: NextPage = () => {
   const router = useRouter();
-  const [email, onChangeEmail] = useInput();
+  const [userId, onChangeUserId] = useInput();
   const [pw, onChangePw] = useInput();
 
   const onClickJoinBtn = () => router.push('/login/join');
@@ -14,8 +14,8 @@ const Index: NextPage = () => {
   return (
     <ColBox>
       <LoginComponent
-        email={email}
-        onChangeEmail={onChangeEmail}
+        userId={userId}
+        onChangeUserId={onChangeUserId}
         pw={pw}
         onChangePw={onChangePw}
         onClickJoinBtn={onClickJoinBtn}

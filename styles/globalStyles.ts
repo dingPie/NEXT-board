@@ -11,15 +11,15 @@ const GlobalStyle = createGlobalStyle`
   body {
     margin: 0 auto;
     height: 100%;
-    background: ${({ theme }) => theme.colors.light_gray};
-    max-width: 1200px;
+    /* background: ${({ theme }) => theme.colors.light_gray}; */
+    /* max-width: 1200px; */
   }
 
   a {
     color: inherit;
     text-decoration: none;
   }
-  @media (prefers-color-scheme: dark) {
+  /* @media (prefers-color-scheme: dark) {
     html {
       color-scheme: dark;
     }
@@ -27,7 +27,7 @@ const GlobalStyle = createGlobalStyle`
       color: white;
       background: ${({ theme }) => theme.colors.dark_gray};
     }
-  }
+  } */
 
 `;
 

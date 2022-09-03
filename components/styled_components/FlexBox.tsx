@@ -3,10 +3,6 @@ import styled, { css } from 'styled-components';
 import { fontSizeSet, IFlexLayout, setFlexLayout } from '../../styles/styleCss';
 
 interface IFlexBox extends IFlexLayout {
-  // center?: boolean;
-  // right?: boolean;
-  // between?: boolean;
-  // align?: string;
   gap?: number;
   padding?: string;
   width?: number;
@@ -42,7 +38,7 @@ export const RowBox = styled.div<IFlexBox>`
 export const ColBox = styled.div<IFlexBox>`
   display: flex;
   flex-direction: column;
-  gap: ${({ gap }) => (gap ? gap + 'rem' : '.5rem')};
+  gap: ${({ gap }) => (gap ? gap + 'rem' : '0')};
 
   width: ${({ width }) => (width ? width + 'rem' : '100%')};
   height: ${({ height }) => (height ? height + 'rem' : 'auto')};

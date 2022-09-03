@@ -1,4 +1,5 @@
 // my-theme.ts
+import { createTheme, PaletteColorOptions } from '@mui/material';
 import { DefaultTheme } from 'styled-components';
 
 const calcRem = (size: number) => `${size / 16}rem`;
@@ -8,7 +9,11 @@ const colors = {
   white: '#FFFFFF',
   dark_gray: '#505050',
   light_gray: '#F5F5F5',
-  primary_blue: '#679BFF',
+  primary_blue: '#1967D2',
+  secondary_purple: '9C27B0',
+  error_red: '#D32F2F',
+  success_green: '#2E7D32',
+  info_blue: '#0288D1',
 };
 
 const fontSizes = {

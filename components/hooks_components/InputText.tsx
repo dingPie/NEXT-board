@@ -100,6 +100,9 @@ const InputTextEle = styled.input<IInputTextEle>`
   ${fontSizeSet};
   border-radius: ${({ radius }) => radius && radius + 'rem'};
 
+  border: none;
+  outline: none;
+
   ${({ shadow }) => {
     return (
       shadow &&

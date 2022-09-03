@@ -1,4 +1,6 @@
 import { ReactNode } from 'react';
+import styled from 'styled-components';
+import theme from '../styles/theme';
 import Footer from './Footer';
 import Header from './Header';
 
@@ -10,8 +12,13 @@ export default function Layout({ children }: ILayout) {
   return (
     <>
       <Header />
-      <main>{children}</main>
+      <Main>{children}</Main>
       <Footer />
     </>
   );
 }
+
+const Main = styled.main`
+  max-width: ${({ theme }) => theme.deviceSizes.tablet};
+  margin: 0 auto;
+`;

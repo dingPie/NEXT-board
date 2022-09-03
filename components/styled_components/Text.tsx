@@ -12,6 +12,7 @@ interface IText {
   bgColor?: string;
   radius?: number;
   shadow?: boolean;
+  textShadow?: boolean;
   inline?: boolean;
   cursor?: boolean;
   center?: boolean;
@@ -34,6 +35,7 @@ const TextComponent = ({
   bgColor,
   radius,
   shadow,
+  textShadow,
   inline,
   cursor,
   center,
@@ -53,6 +55,7 @@ const TextComponent = ({
       bgColor={bgColor}
       radius={radius}
       shadow={shadow}
+      textShadow={textShadow}
       inline={inline}
       cursor={cursor}
       center={center}
@@ -89,8 +92,12 @@ const Text = styled.div<IText>`
   ${({ shadow }) => {
     return (
       shadow &&
-      'box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1), -2px -2px 4px rgba(0, 0, 0, 0.05)'
+      'box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1), -2px -2px 4px rgba(0, 0, 0, 0.05);'
     );
+  }};
+
+  ${({ textShadow }) => {
+    return textShadow && 'text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4)';
   }};
 
   ${({ cursor }) => {

@@ -99,8 +99,10 @@ const InputPwEle = styled.input.attrs({
     lineHeight ? lineHeight + 'rem' : '1.25rem'};
   background: ${({ bgColor }) => bgColor && bgColor};
 
-  ${fontSizeSet};
+  border: none;
+  outline: none;
   border-radius: ${({ radius }) => radius && radius + 'rem'};
+  ${fontSizeSet};
 
   ${({ shadow }) => {
     return (

@@ -6,7 +6,7 @@ import GlobalStyle from '../styles/globalStyles';
 import theme from '../styles/theme';
 
 import { NextPage } from 'next/types';
-import { ReactElement, ReactNode } from 'react';
+import { ReactElement, ReactNode, useEffect } from 'react';
 import Layout from '../components/Layout';
 
 // NextPage 의 타입과 (page: ReactElement) => ReactNode의 타입 결합

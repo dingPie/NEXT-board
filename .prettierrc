@@ -5,7 +5,7 @@
   "bracketSpacing": true,
   "arrowParens": "avoid",
   "semi": true,
-  "singleQuote": true,
+  "singleQuote": false,
   "trailingComma": "all",
   "quoteProps": "as-needed",
   "htmlWhitespaceSensitivity": "css",

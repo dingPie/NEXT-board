@@ -1,9 +1,9 @@
-import { ChangeEvent } from 'react';
-import { Button } from '@mui/material';
-import InputPw from '../hooks_components/InputPw';
-import InputText from '../hooks_components/InputText';
-import { ColBox, RowBox } from '../styled_components/FlexBox';
-import Text from '../styled_components/Text';
+import { ChangeEvent } from "react";
+import { Button } from "@mui/material";
+import InputPw from "../hooks_components/InputPw";
+import InputText from "../hooks_components/InputText";
+import { ColBox, RowBox } from "../css_components/FlexBox";
+import Text from "../css_components/Text";
 
 interface ILoginComponent {
   userId: string;
@@ -13,6 +13,7 @@ interface ILoginComponent {
   pw: string;
   onChangePw: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
   onClickJoinBtn: () => void;
+  onClickLoginBtn: (userId: string, pw: string) => void;
 }
 
 const LoginComponent = ({
@@ -21,6 +22,7 @@ const LoginComponent = ({
   pw,
   onChangePw,
   onClickJoinBtn,
+  onClickLoginBtn,
 }: ILoginComponent) => {
   return (
     <>
@@ -49,10 +51,14 @@ const LoginComponent = ({
         </ColBox>
 
         <RowBox>
-          <Button variant="contained" color="primary">
+          <Button
+            onClick={() => onClickLoginBtn(userId, pw)}
+            variant="contained"
+            color="primary"
+          >
             로그인
           </Button>
-          <Button variant="contained" color="info" onClick={onClickJoinBtn}>
+          <Button onClick={onClickJoinBtn} variant="contained" color="info">
             회원가입
           </Button>
         </RowBox>

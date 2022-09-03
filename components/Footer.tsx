@@ -1,6 +1,6 @@
-import styled from 'styled-components';
-import { RowBox } from './styled_components/FlexBox';
-import Text from './styled_components/Text';
+import styled from "styled-components";
+import { RowBox } from "./css_components/FlexBox";
+import Text from "./css_components/Text";
 
 const Footer = () => {
   return (

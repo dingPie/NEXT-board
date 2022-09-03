@@ -1,27 +1,30 @@
-import { RowBox } from './styled_components/FlexBox';
-import styled from 'styled-components';
-import Text from './styled_components/Text';
-import { useRouter } from 'next/router';
-import { Button } from '@mui/material';
-
-import { createTheme } from '@mui/material/styles';
-
-// const muiTheme = createTheme(styledTheme);
+import styled from "styled-components";
+import { RowBox } from "./css_components/FlexBox";
+import Text from "./css_components/Text";
+import { useRouter } from "next/router";
+import { Button } from "@mui/material";
+import {
+  deleteLocalStorage,
+  getLocalStorage,
+} from "../utils/service/local_service";
+import { useEffect, useState } from "react";
 
 const Header = () => {
   const router = useRouter();
+  const [isLogin, setIsLogin] = useState(false);
 
-  const getLocalStorage = (key: string) => localStorage.getItem(key);
-  const deleteLocalStorage = (key: string) => localStorage.removeItem(key);
+  useEffect(() => {
+    getLocalStorage("uid") && setIsLogin(true);
+  }, []);
 
   const onClickLoginBtn = () => {
-    if (getLocalStorage('uid')) {
-      console.log('유저정보 있음');
-      deleteLocalStorage('uid');
-      router.push('posts');
+    if (isLogin) {
+      // 로그아웃 로직 추가
+      deleteLocalStorage("uid");
+      setIsLogin(false);
+      router.push("posts");
     } else {
-      console.log('유저정보 없음');
-      router.push('login');
+      router.push("login");
     }
   };
 
@@ -32,7 +35,7 @@ const Header = () => {
           NEXT.board
         </Text>
         <LoginButton variant="outlined" onClick={onClickLoginBtn}>
-          로그인
+          {isLogin ? "로그아웃" : "로그인"}
         </LoginButton>
       </HeaderBox>
     </>

@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { RowBox } from "./css_components/FlexBox";
 import Text from "./css_components/Text";
 import { useRouter } from "next/router";
-import { Button } from "@mui/material";
+import { Avatar, Button } from "@mui/material";
 import {
   deleteLocalStorage,
   getLocalStorage,
@@ -15,16 +15,15 @@ const Header = () => {
 
   useEffect(() => {
     getLocalStorage("uid") && setIsLogin(true);
-  }, []);
+  }, [router.pathname]);
 
   const onClickLoginBtn = () => {
     if (isLogin) {
-      // 로그아웃 로직 추가
       deleteLocalStorage("uid");
       setIsLogin(false);
-      router.push("posts");
+      router.push("/posts");
     } else {
-      router.push("login");
+      router.push("/login");
     }
   };
 
@@ -34,9 +33,13 @@ const Header = () => {
         <Text color="white" textShadow fontSize="2x" bold>
           NEXT.board
         </Text>
-        <LoginButton variant="outlined" onClick={onClickLoginBtn}>
-          {isLogin ? "로그아웃" : "로그인"}
-        </LoginButton>
+
+        <RowBox justifyEnd padding="0">
+          {isLogin && <Avatar src="/broken-image.jpg" />}
+          <LoginButton variant="outlined" onClick={onClickLoginBtn}>
+            {isLogin ? "로그아웃" : "로그인"}
+          </LoginButton>
+        </RowBox>
       </HeaderBox>
     </>
   );

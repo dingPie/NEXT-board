@@ -4,10 +4,8 @@ import JoinComponent from "../../components/login/JoinComponent";
 import { ColBox } from "../../components/css_components/FlexBox";
 import useInput from "../../utils/hooks/useInput";
 import { setLocalStorage } from "../../utils/service/local_service";
-import {
-  checkValidPw,
-  checkValidUserId,
-} from "../../utils/service/login_service";
+import { checkValidPw } from "../../utils/service/login_service";
+import axios from "axios";
 
 const JoinPage = () => {
   const router = useRouter();
@@ -21,16 +19,21 @@ const JoinPage = () => {
 
   const onClickCancelBtn = () => router.push("/login");
 
-  const onClickJoinBtn = () => {
+  const onClickJoinBtn = async (userId: string, pw: string) => {
+    const body = {
+      userId: userId,
+      pw: pw,
+    };
+    await axios.post("/api/login/join", body);
+
     setLocalStorage("uid", userId);
-    console.log(
-      "회원가입 완료, 로직 실행: 로그인되는 아이디를 임시로 localstorage에 저장",
-    );
     router.push("/login");
   };
 
-  const onClickCheckUserIdBtn = (userId: string) => {
-    checkValidUserId(userId) && setIsValidUserId(true);
+  const onClickCheckDuplicateId = async (userId: string) => {
+    const params = { userId: userId };
+    const res = await axios.get("/api/login/duplicateId", { params });
+    setIsValidUserId(res.data);
   };
 
   useEffect(() => {
@@ -63,7 +66,7 @@ const JoinPage = () => {
         isValidUserId={isValidUserId}
         isValidPw={isValidPw}
         isJoinConfirm={isJoinConfirm}
-        onClickCheckUserIdBtn={onClickCheckUserIdBtn}
+        onClickCheckDuplicateId={onClickCheckDuplicateId}
         onClickJoinBtn={onClickJoinBtn}
       />
     </ColBox>

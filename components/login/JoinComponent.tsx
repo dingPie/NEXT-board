@@ -4,6 +4,7 @@ import InputPw from "../hooks_components/InputPw";
 import InputText from "../hooks_components/InputText";
 import { ColBox, RowBox } from "../css_components/FlexBox";
 import Text from "../css_components/Text";
+import { checkValidUserId } from "../../utils/service/login_service";
 
 interface IJoinPage {
   userId: string;
@@ -19,9 +20,9 @@ interface IJoinPage {
   isValidUserId: boolean;
   isValidPw: boolean;
   isJoinConfirm: boolean;
-  onClickCheckUserIdBtn: (userId: string) => void;
+  onClickCheckDuplicateId: (userId: string) => void;
   onClickCancelBtn: () => void;
-  onClickJoinBtn: () => void;
+  onClickJoinBtn: (userId: string, pw: string) => void;
 }
 
 const JoinPage = ({
@@ -34,7 +35,7 @@ const JoinPage = ({
   isValidUserId,
   isValidPw,
   isJoinConfirm,
-  onClickCheckUserIdBtn,
+  onClickCheckDuplicateId,
   onClickCancelBtn,
   onClickJoinBtn,
 }: IJoinPage) => {
@@ -58,7 +59,8 @@ const JoinPage = ({
               radius={0.25}
             />
             <Button
-              onClick={() => onClickCheckUserIdBtn(userId)}
+              onClick={() => onClickCheckDuplicateId(userId)}
+              disabled={!checkValidUserId(userId)}
               style={{ width: "8rem" }}
               variant="contained"
               color="primary"
@@ -69,7 +71,7 @@ const JoinPage = ({
           <Text padding=".5rem 0">
             {isValidUserId
               ? "사용 가능한 아이디입니다."
-              : "아이디 확인이 필요합니다."}
+              : "중복된 아이디 입니다."}
           </Text>
         </ColBox>
 
@@ -114,7 +116,7 @@ const JoinPage = ({
             취소
           </Button>
           <Button
-            onClick={onClickJoinBtn}
+            onClick={() => onClickJoinBtn(userId, pw)}
             disabled={!isJoinConfirm}
             variant="contained"
             color="primary"

@@ -8,31 +8,55 @@ import {
   checkValidUserId,
 } from "../../utils/service/login_service";
 import { setLocalStorage } from "../../utils/service/local_service";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const Index: NextPage = () => {
   const router = useRouter();
-  const [userId, onChangeUserId, resetUserId] = useInput();
-  const [pw, onChangePw, resetPw] = useInput();
+  const [userId, onChangeUserId] = useInput();
+  const [pw, onChangePw] = useInput();
+  const [isWarnAlert, setIsWarnAlert] = useState(false);
+  const [isLoginConfirm, setIsLoginConfirm] = useState(false);
 
   const onClickJoinBtn = () => router.push("/login/join");
-  const onClickLoginBtn = (userId: string, pw: string) => {
-    if (checkValidUserId(userId) && checkValidPw(pw)) {
+
+  const onClickLoginBtn = async (userId: string, pw: string) => {
+    const body = {
+      userId: userId,
+      pw: pw,
+    };
+    const res = await axios.post("/api/login", body);
+
+    if (res.data) {
       setLocalStorage("uid", userId);
       router.push("/posts");
     } else {
-      // 로그아웃 실패로직 임시구현
-      alert("아이디 또는 비밀번호가 일치하지 않습니다.");
-      resetUserId();
-      resetPw();
+      setIsWarnAlert(true);
     }
   };
+
+  useEffect(() => {
+    if (checkValidUserId(userId) && checkValidPw(pw)) setIsLoginConfirm(true);
+    else setIsLoginConfirm(false);
+  }, [userId, pw]);
+
+  useEffect(() => {
+    if (isWarnAlert) {
+      const time = setTimeout(() => setIsWarnAlert(false), 2000);
+      return () => {
+        clearTimeout(time);
+      };
+    }
+  }, [isWarnAlert]);
 
   return (
     <ColBox>
       <LoginComponent
         userId={userId}
-        onChangeUserId={onChangeUserId}
         pw={pw}
+        isLoginConfirm={isLoginConfirm}
+        isWarnAlert={isWarnAlert}
+        onChangeUserId={onChangeUserId}
         onChangePw={onChangePw}
         onClickJoinBtn={onClickJoinBtn}
         onClickLoginBtn={onClickLoginBtn}

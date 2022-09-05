@@ -1,14 +1,21 @@
-import { ChangeEvent } from "react";
-import { Alert, Button } from "@mui/material";
-import InputPw from "../hooks_components/InputPw";
-import InputText from "../hooks_components/InputText";
-import { ColBox, RowBox } from "../css_components/FlexBox";
-import Text from "../css_components/Text";
+import { IPost } from "../../utils/types";
+import { ColBox } from "../css_components/FlexBox";
+import PostCard from "./fragments/PostCard";
 
-interface IPostComponent {}
+interface IPostComponent {
+  posts: IPost[];
+}
 
-const PostComponent = ({}: IPostComponent) => {
-  return <></>;
+const PostComponent = ({ posts }: IPostComponent) => {
+  return (
+    <>
+      <ColBox>
+        {posts.map(post => (
+          <PostCard key={post.crtDate} post={post} />
+        ))}
+      </ColBox>
+    </>
+  );
 };
 
 export default PostComponent;

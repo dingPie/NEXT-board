@@ -41,12 +41,12 @@ const JoinPage = ({
 }: IJoinPage) => {
   return (
     <>
-      <ColBox padding="0 1rem">
+      <ColBox padding="1rem">
         <Text fontSize="2x" bold>
           JOIN
         </Text>
 
-        <ColBox>
+        <ColBox padding="1rem 0">
           <Text fontSize="l" bold>
             아이디
           </Text>
@@ -75,7 +75,7 @@ const JoinPage = ({
           </Text>
         </ColBox>
 
-        <ColBox>
+        <ColBox padding="1rem 0">
           <Text fontSize="l" bold>
             비밀번호
           </Text>
@@ -88,7 +88,7 @@ const JoinPage = ({
           />
         </ColBox>
 
-        <ColBox>
+        <ColBox padding=".25rem 0">
           <Text fontSize="l" bold>
             비밀번호 확인
           </Text>
@@ -107,7 +107,7 @@ const JoinPage = ({
           </Text>
         </ColBox>
 
-        <RowBox>
+        <RowBox padding=".5rem 0">
           <Button
             onClick={onClickCancelBtn}
             variant="contained"

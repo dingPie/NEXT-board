@@ -25,11 +25,11 @@ const Index: NextPage = () => {
       userId: userId,
       pw: pw,
     };
-    const res = await axios.post("/api/login", body);
+    const res = await axios.post("/api/login/getUser", body);
 
     if (res.data) {
       setLocalStorage("uid", userId);
-      router.push("/posts");
+      router.replace("/posts");
     } else {
       setIsWarnAlert(true);
     }

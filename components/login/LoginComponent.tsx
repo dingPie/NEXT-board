@@ -30,12 +30,12 @@ const LoginComponent = ({
 }: ILoginComponent) => {
   return (
     <>
-      <ColBox padding="0 1rem">
+      <ColBox padding="1rem">
         <Text fontSize="2x" bold>
           LOGIN
         </Text>
 
-        <ColBox>
+        <ColBox padding="1rem 0">
           <Text fontSize="l" bold>
             아이디
           </Text>
@@ -47,14 +47,14 @@ const LoginComponent = ({
           />
         </ColBox>
 
-        <ColBox>
+        <ColBox padding="1rem 0">
           <Text fontSize="l" bold>
             비밀번호
           </Text>
           <InputPw shadow value={pw} onChange={onChangePw} radius={0.25} />
         </ColBox>
 
-        <RowBox>
+        <RowBox padding=".5rem 0">
           <Button
             onClick={() => onClickLoginBtn(userId, pw)}
             disabled={!isLoginConfirm}
@@ -67,6 +67,7 @@ const LoginComponent = ({
             회원가입
           </Button>
         </RowBox>
+
         {isWarnAlert && (
           <Alert variant="outlined" severity="warning">
             아이디, 비밀번호가 잘못되었습니다.

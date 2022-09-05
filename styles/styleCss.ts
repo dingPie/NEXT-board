@@ -1,5 +1,5 @@
-import { css, keyframes } from 'styled-components';
-import { darken, lighten } from 'polished';
+import { css, keyframes } from "styled-components";
+import { darken, lighten } from "polished";
 
 export interface IFlexLayout {
   justifyCenter?: boolean;
@@ -21,15 +21,15 @@ export const setFlexLayout = css<IFlexLayout>`
     alignCenter,
     alignBetween,
   }) => {
-    let justify = 'flex-start';
-    if (justifyEnd) justify = 'flex-end';
-    else if (justifyCenter) justify = 'center';
-    else if (justifyBetween) justify = 'space-between';
+    let justify = "flex-start";
+    if (justifyEnd) justify = "flex-end";
+    else if (justifyCenter) justify = "center";
+    else if (justifyBetween) justify = "space-between";
 
-    let align = 'flex-start';
-    if (alignEnd) align = 'flex-end';
-    else if (alignCenter) align = 'center';
-    else if (alignBetween) align = 'space-between';
+    let align = "flex-start";
+    if (alignEnd) align = "flex-end";
+    else if (alignCenter) align = "center";
+    else if (alignBetween) align = "space-between";
 
     return css`
       justify-content: ${justify};
@@ -55,15 +55,15 @@ export const polishedColor = css<{ bgColor: string }>`
 
 export const fontSizeSet = css<{ fontSize?: string }>`
   ${({ fontSize }) => {
-    let result = '';
-    if (fontSize === '3x') result = '2rem';
-    else if (fontSize === 'title') result = '3rem';
-    else if (fontSize === '2x') result = '1.5rem';
-    else if (fontSize === 'xl') result = '1.25rem';
-    else if (fontSize === 'l') result = '1rem';
-    else if (fontSize === 's') result = '.75rem';
-    else if (fontSize === 'xs') result = '.625rem';
-    else if (fontSize === 'm' || !fontSize) result = '.875rem';
+    let result = "";
+    if (fontSize === "3x") result = "2rem";
+    else if (fontSize === "title") result = "3rem";
+    else if (fontSize === "2x") result = "1.5rem";
+    else if (fontSize === "xl") result = "1.25rem";
+    else if (fontSize === "l") result = "1rem";
+    else if (fontSize === "s") result = ".75rem";
+    else if (fontSize === "xs") result = ".625rem";
+    else if (fontSize === "m" || !fontSize) result = ".875rem";
 
     return css`
       font-size: ${result};
@@ -79,10 +79,10 @@ export interface IJustfiy {
 
 export const setJustify = css<IJustfiy>`
   ${({ center, right, between, align }) => {
-    let justify = 'flex-start';
-    if (right) justify = 'flex-end';
-    else if (center) justify = 'center';
-    else if (between) justify = 'space-between';
+    let justify = "flex-start";
+    if (right) justify = "flex-end";
+    else if (center) justify = "center";
+    else if (between) justify = "space-between";
 
     return css`
       justify-content: ${justify};
@@ -113,5 +113,5 @@ export const setTextLine = css<{ whiteSpace?: string; lineClamp?: number }>`
   ${overFlowHidden};
 
   text-overflow: ellipsis;
-  white-space: ${({ whiteSpace }) => (whiteSpace ? whiteSpace : 'pre-wrap')};
+  white-space: ${({ whiteSpace }) => (whiteSpace ? whiteSpace : "pre-wrap")};
 `;

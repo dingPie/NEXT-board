@@ -56,14 +56,14 @@ export const polishedColor = css<{ bgColor: string }>`
 export const fontSizeSet = css<{ fontSize?: string }>`
   ${({ fontSize }) => {
     let result = "";
-    if (fontSize === "3x") result = "2rem";
+    if (fontSize === "3x") result = "2.5rem";
     else if (fontSize === "title") result = "3rem";
-    else if (fontSize === "2x") result = "1.5rem";
-    else if (fontSize === "xl") result = "1.25rem";
-    else if (fontSize === "l") result = "1rem";
-    else if (fontSize === "s") result = ".75rem";
+    else if (fontSize === "2x") result = "2rem";
+    else if (fontSize === "xl") result = "1.5rem";
+    else if (fontSize === "l") result = "1.25rem";
+    else if (fontSize === "s") result = ".875rem";
     else if (fontSize === "xs") result = ".625rem";
-    else if (fontSize === "m" || !fontSize) result = ".875rem";
+    else if (fontSize === "m" || !fontSize) result = "1rem";
 
     return css`
       font-size: ${result};

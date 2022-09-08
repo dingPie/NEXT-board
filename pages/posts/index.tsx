@@ -9,9 +9,6 @@ const PostsPage = ({
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <>
-      <Text fontSize="2x" bold padding="1rem .5rem">
-        포스트 목록
-      </Text>
       <PostComponent posts={posts} />
     </>
   );

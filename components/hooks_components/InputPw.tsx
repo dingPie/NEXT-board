@@ -4,24 +4,12 @@ import React, {
   useEffect,
   useImperativeHandle,
   useRef,
-} from 'react';
-import styled, { css } from 'styled-components';
-import { fontSizeSet } from '../../styles/styleCss';
+} from "react";
+import styled, { css } from "styled-components";
+import { fontSizeSet } from "../../styles/styleCss";
+import { IInputTextEle } from "./InputText";
 
-interface IInputPwEle {
-  width?: number;
-  height?: number;
-  shadow?: boolean;
-  maxHeight?: number;
-  bold?: boolean;
-  bgColor?: string;
-  padding?: string;
-  lineHeight?: number;
-  fontSize?: string;
-  radius?: number;
-}
-
-interface IInputPw extends IInputPwEle {
+interface IInputPw extends IInputTextEle {
   value?: string;
   defaultValue?: string;
   placeholder?: string;
@@ -49,6 +37,12 @@ const InputPw = forwardRef<HTMLInputElement, IInputPw>(
       bold,
       bgColor,
       fontSize,
+      border,
+      borderRadius,
+      borderBottom,
+      borderTop,
+      borderLeft,
+      borderRight,
     },
     externalRef,
   ) => {
@@ -78,6 +72,12 @@ const InputPw = forwardRef<HTMLInputElement, IInputPw>(
         padding={padding}
         lineHeight={lineHeight}
         fontSize={fontSize}
+        border={border}
+        borderRadius={borderRadius}
+        borderBottom={borderBottom}
+        borderTop={borderTop}
+        borderLeft={borderLeft}
+        borderRight={borderRight}
       />
     );
   },
@@ -86,28 +86,33 @@ const InputPw = forwardRef<HTMLInputElement, IInputPw>(
 export default memo(InputPw);
 
 const InputPwEle = styled.input.attrs({
-  type: 'password',
-})<IInputPwEle>`
-  width: ${({ width }) => (width ? width + 'rem' : '100%')};
-  height: ${({ height }) => (height ? height + 'rem' : 'auto')};
-  max-height: ${({ maxHeight }) => (maxHeight ? maxHeight + 'rem' : 'auto')};
+  type: "password",
+})<IInputTextEle>`
+  width: ${({ width }) => (width ? width + "rem" : "100%")};
+  height: ${({ height }) => (height ? height + "rem" : "auto")};
+  max-height: ${({ maxHeight }) => (maxHeight ? maxHeight + "rem" : "auto")};
   min-height: 1.75rem;
 
-  font-weight: ${({ bold }) => bold && 'bold'};
+  font-weight: ${({ bold }) => bold && "bold"};
   padding: ${({ padding }) => padding && padding};
   line-height: ${({ lineHeight }) =>
-    lineHeight ? lineHeight + 'rem' : '1.25rem'};
+    lineHeight ? lineHeight + "rem" : "1.25rem"};
   background: ${({ bgColor }) => bgColor && bgColor};
 
   border: none;
   outline: none;
-  border-radius: ${({ radius }) => radius && radius + 'rem'};
+  border-radius: ${({ borderRadius }) => borderRadius && borderRadius + "rem"};
+  border: ${({ border }) => border && border};
+  border-bottom: ${({ borderBottom }) => borderBottom && borderBottom};
+  border-top: ${({ borderTop }) => borderTop && borderTop};
+  border-left: ${({ borderLeft }) => borderLeft && borderLeft};
+  border-right: ${({ borderRight }) => borderRight && borderRight};
   ${fontSizeSet};
 
   ${({ shadow }) => {
     return (
       shadow &&
-      'box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1), -2px -2px 4px rgba(0, 0, 0, 0.05)'
+      "box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1), -2px -2px 4px rgba(0, 0, 0, 0.05)"
     );
   }};
 

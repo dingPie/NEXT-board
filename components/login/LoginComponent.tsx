@@ -41,6 +41,7 @@ const LoginComponent = ({
           </Text>
           <InputText
             shadow
+            padding=".5rem"
             value={userId}
             onChange={onChangeUserId}
             radius={0.25}
@@ -51,7 +52,13 @@ const LoginComponent = ({
           <Text fontSize="l" bold>
             비밀번호
           </Text>
-          <InputPw shadow value={pw} onChange={onChangePw} radius={0.25} />
+          <InputPw
+            shadow
+            padding=".5rem"
+            value={pw}
+            onChange={onChangePw}
+            radius={0.25}
+          />
         </ColBox>
 
         <RowBox padding=".5rem 0">

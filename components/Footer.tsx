@@ -17,7 +17,7 @@ const Footer = () => {
 export default Footer;
 
 const FooterBox = styled(RowBox)`
-  position: absolute;
+  position: fiexd;
   bottom: 0;
   background: ${({ theme }) => theme.colors.primary_blue};
   padding: 0.75rem;

@@ -13,3 +13,8 @@ export interface IPost {
   favoriteCnt?: number;
   thumbnail?: string;
 }
+
+export interface InputType {
+  title: string;
+  content: string;
+}

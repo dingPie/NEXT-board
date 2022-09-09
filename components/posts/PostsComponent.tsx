@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { MouseEvent } from "react";
 import { IPost } from "../../utils/types";
 import { ColBox, RowBox } from "../css_components/FlexBox";
+import { deletePost } from "../write/writeService";
 import PostCard from "./fragments/PostCard";
 
 interface IPostsComponent {
@@ -24,12 +25,21 @@ const PostsComponent = ({ posts }: IPostsComponent) => {
 
   const onClickEditBtn = (e: MouseEvent<HTMLButtonElement>, post: IPost) => {
     e.stopPropagation();
-    console.log("edit");
+    router.push(`/write/${post.id}`);
   };
 
-  const onClickDeleteBtn = (e: MouseEvent<HTMLButtonElement>, post: IPost) => {
+  const onClickDeleteBtn = async (
+    e: MouseEvent<HTMLButtonElement>,
+    post: IPost,
+  ) => {
     e.stopPropagation();
-    console.log("delete");
+    // mui alert으로 수정하자
+    const confirm = window.confirm("정말 이 글을 삭제할까요?");
+    if (!confirm) return;
+    deletePost(post.id);
+
+    // 글 삭제 후 다시 불러오기 해야되나?
+    // 강제새로고침?
   };
 
   return (

@@ -1,9 +1,9 @@
-import WriteComponents from "../../components/write/WriteComponents";
+import WriteComponent from "../../components/write/WriteComponent";
 
 const WritePage = () => {
   return (
     <>
-      <WriteComponents />
+      <WriteComponent />
     </>
   );
 };

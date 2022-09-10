@@ -1,14 +1,29 @@
-import { useRouter } from 'next/router';
+import axios from "axios";
+import { GetStaticPropsContext } from "next";
+import { useRouter } from "next/router";
+import WriteComponent from "../../components/write/WriteComponent";
+import { IPost } from "../../utils/types";
 
-const EditPostPage = () => {
+const EditPostPage = ({ post }: { post: IPost }) => {
   const router = useRouter();
   const { postId } = router.query;
 
   return (
     <>
-      <h1> 수정할 포스트 {postId} </h1>
+      <WriteComponent editData={post} />
     </>
   );
 };
 
 export default EditPostPage;
+
+const getPost = async (postId: string) => {
+  const res = await axios.get(`http://localhost:3000/api/posts/${postId}`); // baseURL 까지 명시해야 함
+  const data = await res.data;
+  return data;
+};
+
+export async function getServerSideProps(ctx: GetStaticPropsContext) {
+  const post: Promise<IPost> = await getPost(ctx.params?.postId as string); // 바로 사용
+  return { props: { post } };
+}

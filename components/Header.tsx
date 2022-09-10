@@ -27,10 +27,19 @@ const Header = () => {
     }
   };
 
+  const onClickLogo = () => router.push("/posts");
+
   return (
     <>
       <HeaderBox justifyBetween>
-        <Text color="white" textShadow fontSize="2x" bold>
+        <Text
+          onClick={onClickLogo}
+          color="white"
+          textShadow
+          fontSize="2x"
+          bold
+          style={{ cursor: "pointer" }}
+        >
           NEXT.board
         </Text>
 

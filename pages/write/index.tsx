@@ -1,7 +1,9 @@
+import WriteComponent from "../../components/write/WriteComponent";
+
 const WritePage = () => {
   return (
     <>
-      <h1> Write Page</h1>
+      <WriteComponent />
     </>
   );
 };

@@ -5,10 +5,16 @@ export interface IUser {
 }
 
 export interface IPost {
+  id: string;
   title: string;
   content: string;
   writer: string;
   crtDate: number;
   favoriteCnt?: number;
   thumbnail?: string;
+}
+
+export interface InputType {
+  title: string;
+  content: string;
 }

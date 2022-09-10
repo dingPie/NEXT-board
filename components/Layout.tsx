@@ -22,4 +22,5 @@ const Main = styled.main`
   max-width: ${({ theme }) => theme.deviceSizes.tablet};
   margin: 0 auto;
   padding: 1rem;
+  min-height: 84.9vh;
 `;

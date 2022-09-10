@@ -1,6 +1,7 @@
 import { Button, Input, TextField } from "@mui/material";
 import axios from "axios";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { getLocalStorage } from "../../utils/service/local_service";
 import { InputType, IPost } from "../../utils/types";
@@ -17,6 +18,7 @@ const WriteComponent = ({ editData }: WriteComponentProps) => {
   const {
     register,
     handleSubmit,
+    setFocus,
     formState: { errors },
   } = useForm<InputType>();
 
@@ -31,6 +33,12 @@ const WriteComponent = ({ editData }: WriteComponentProps) => {
 
     router.push("/posts");
   });
+
+  // 컴포넌트 load시, 제목 수정 focus
+  useEffect(() => {
+    if (editData) setFocus("content");
+    else setFocus("title");
+  }, [setFocus, editData]);
 
   return (
     <>

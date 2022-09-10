@@ -44,7 +44,7 @@ const LoginComponent = ({
             padding=".5rem"
             value={userId}
             onChange={onChangeUserId}
-            radius={0.25}
+            borderRadius={0.25}
           />
         </ColBox>
 
@@ -57,7 +57,7 @@ const LoginComponent = ({
             padding=".5rem"
             value={pw}
             onChange={onChangePw}
-            radius={0.25}
+            borderRadius={0.25}
           />
         </ColBox>
 

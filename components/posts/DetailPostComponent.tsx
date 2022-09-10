@@ -1,18 +1,20 @@
 import { Button, ButtonGroup } from "@mui/material";
-import React from "react";
+import { useRouter } from "next/router";
+import React, { MouseEvent } from "react";
 import styled from "styled-components";
 import { ColBox, RowBox } from "../../components/css_components/FlexBox";
 import Text from "../../components/css_components/Text";
 import { getLocalStorage } from "../../utils/service/local_service";
 import { toDetailTime } from "../../utils/time";
 import { IPost } from "../../utils/types";
+import { deletePost } from "../write/writeService";
 
 interface IDetailPostComponent {
   post: IPost;
 }
 const DetailPostComponent = ({ post }: IDetailPostComponent) => {
   const { id, title, content, crtDate, favoriteCnt, writer } = post;
-
+  const router = useRouter();
   const [userId, setUserId] = React.useState("");
 
   React.useEffect(() => {
@@ -21,6 +23,23 @@ const DetailPostComponent = ({ post }: IDetailPostComponent) => {
       setUserId(getUid);
     }
   }, []);
+
+  const onClickEditBtn = (e: MouseEvent<HTMLButtonElement>, post: IPost) => {
+    e.stopPropagation();
+    router.push(`/write/${post.id}`);
+  };
+
+  const onClickDeleteBtn = async (
+    e: MouseEvent<HTMLButtonElement>,
+    post: IPost,
+  ) => {
+    e.stopPropagation();
+    // mui alert modal으로 수정하자
+    const confirm = window.confirm("정말 이 글을 삭제할까요?");
+    if (!confirm) return;
+    await deletePost(post.id);
+    router.push(`/posts`);
+  };
 
   return (
     <ColBox padding="1rem">
@@ -36,14 +55,14 @@ const DetailPostComponent = ({ post }: IDetailPostComponent) => {
         {post.writer === userId && (
           <ButtonGroup>
             <WriterBtn
-              // onClick={e => onClickEditBtn(e, post)}
+              onClick={e => onClickEditBtn(e, post)}
               variant="outlined"
               color="warning"
             >
               수정
             </WriterBtn>
             <WriterBtn
-              // onClick={e => onClickDeleteBtn(e, post)}
+              onClick={e => onClickDeleteBtn(e, post)}
               variant="outlined"
               color="error"
             >

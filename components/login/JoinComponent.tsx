@@ -56,7 +56,7 @@ const JoinPage = ({
               shadow
               value={userId}
               onChange={onChangeUserId}
-              radius={0.25}
+              borderRadius={0.25}
             />
             <Button
               onClick={() => onClickCheckDuplicateId(userId)}
@@ -84,7 +84,7 @@ const JoinPage = ({
             shadow
             value={pw}
             onChange={onChangePw}
-            radius={0.25}
+            borderRadius={0.25}
           />
         </ColBox>
 
@@ -97,7 +97,7 @@ const JoinPage = ({
             shadow
             value={doublePw}
             onChange={onChangeDoublePw}
-            radius={0.25}
+            borderRadius={0.25}
           />
 
           <Text padding=".5rem 0">

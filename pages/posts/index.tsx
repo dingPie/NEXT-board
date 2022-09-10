@@ -29,5 +29,8 @@ const getPosts = async () => {
 export const getStaticProps: GetStaticProps = async () => {
   const posts: Promise<IPost[]> = await getPosts(); // 바로 사용
 
-  return { props: { posts } };
+  return {
+    props: { posts },
+    revalidate: 5,
+  };
 };

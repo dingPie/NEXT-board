@@ -36,10 +36,8 @@ const PostsComponent = ({ posts }: IPostsComponent) => {
     // mui alert으로 수정하자
     const confirm = window.confirm("정말 이 글을 삭제할까요?");
     if (!confirm) return;
-    deletePost(post.id);
-
-    // 글 삭제 후 다시 불러오기 해야되나?
-    // 강제새로고침?
+    await deletePost(post.id);
+    router.push(`/posts`); // 강력 새로고침의 방법. 이게 router.reload보다 빠르다.
   };
 
   return (

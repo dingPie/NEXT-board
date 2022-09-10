@@ -38,7 +38,7 @@ const DetailPostComponent = ({ post }: IDetailPostComponent) => {
     const confirm = window.confirm("정말 이 글을 삭제할까요?");
     if (!confirm) return;
     await deletePost(post.id);
-    router.push(`/posts`);
+    router.push(router.asPath);
   };
 
   return (

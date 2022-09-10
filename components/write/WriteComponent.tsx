@@ -25,6 +25,7 @@ const WriteComponent = ({ editData }: WriteComponentProps) => {
   const onClickAddBtn = handleSubmit(async (inputValue: InputType) => {
     const uid = getLocalStorage("uid");
     if (!uid) {
+      // 이것도 ui 수정. toast나 alert이 필요함
       console.log("로그인이 만료되었습니다");
       return;
     }

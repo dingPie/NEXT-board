@@ -1,9 +1,9 @@
 import axios from "axios";
-import { GetStaticPropsContext } from "next";
+import { GetStaticPropsContext, NextPage } from "next";
 import DetailPost from "../../components/posts/PostDetail";
 import { IPost } from "../../utils/types";
 
-const PostPage = ({ post }: { post: IPost }) => {
+const PostPage: NextPage<{ post: IPost }> = ({ post }) => {
   return (
     <>
       <DetailPost post={post} />

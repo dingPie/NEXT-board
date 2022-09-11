@@ -1,10 +1,10 @@
 import axios from "axios";
-import { GetStaticPropsContext } from "next";
+import { GetStaticPropsContext, NextPage } from "next";
 import { useRouter } from "next/router";
 import Write from "../../components/write/Write";
 import { IPost } from "../../utils/types";
 
-const EditPostPage = ({ post }: { post: IPost }) => {
+const EditPostPage: NextPage<{ post: IPost }> = ({ post }) => {
   const router = useRouter();
   const { postId } = router.query;
 

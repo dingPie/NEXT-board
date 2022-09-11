@@ -1,13 +1,14 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import JoinComponent from "../../components/login/JoinComponent";
+import Join from "../../components/login/Join";
 import { ColBox } from "../../components/css_components/FlexBox";
 import useInput from "../../utils/hooks/useInput";
 import { setLocalStorage } from "../../utils/service/local_service";
 import { checkValidPw } from "../../utils/service/login_service";
 import axios from "axios";
+import { NextPage } from "next";
 
-const Join = () => {
+const JoinPage: NextPage = () => {
   const router = useRouter();
   const [userId, onChangeUserId] = useInput();
   const [pw, onChangePw] = useInput();
@@ -55,7 +56,7 @@ const Join = () => {
 
   return (
     <ColBox>
-      <JoinComponent
+      <Join
         userId={userId}
         onChangeUserId={onChangeUserId}
         pw={pw}
@@ -73,4 +74,4 @@ const Join = () => {
   );
 };
 
-export default Join;
+export default JoinPage;

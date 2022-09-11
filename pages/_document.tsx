@@ -1,4 +1,4 @@
-import { ServerStyleSheets } from '@mui/styles';
+import { ServerStyleSheets } from "@mui/styles";
 import Document, {
   DocumentContext,
   DocumentInitialProps,
@@ -6,18 +6,16 @@ import Document, {
   Html,
   Main,
   NextScript,
-} from 'next/document';
-import { ServerStyleSheet } from 'styled-components';
+} from "next/document";
+import { ServerStyleSheet } from "styled-components";
 
 class MyDocument extends Document {
   render() {
     return (
       <Html>
-        <body>
-          <Head></Head>
-          <Main />
-          <NextScript />
-        </body>
+        <Head></Head>
+        <Main />
+        <NextScript />
       </Html>
     );
   }

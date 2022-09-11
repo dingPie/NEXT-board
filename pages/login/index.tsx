@@ -1,6 +1,6 @@
 import { NextPage } from "next";
 import { useRouter } from "next/router";
-import LoginComponent from "../../components/login/LoginComponent";
+import Login from "../../components/login/Login";
 import { ColBox } from "../../components/css_components/FlexBox";
 import useInput from "../../utils/hooks/useInput";
 import {
@@ -11,7 +11,7 @@ import { setLocalStorage } from "../../utils/service/local_service";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const Index: NextPage = () => {
+const LoginPage: NextPage = () => {
   const router = useRouter();
   const [userId, onChangeUserId] = useInput();
   const [pw, onChangePw] = useInput();
@@ -51,7 +51,7 @@ const Index: NextPage = () => {
 
   return (
     <ColBox>
-      <LoginComponent
+      <Login
         userId={userId}
         pw={pw}
         isLoginConfirm={isLoginConfirm}
@@ -65,4 +65,4 @@ const Index: NextPage = () => {
   );
 };
 
-export default Index;
+export default LoginPage;

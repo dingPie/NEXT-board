@@ -7,7 +7,7 @@ import { setLocalStorage } from "../../utils/service/local_service";
 import { checkValidPw } from "../../utils/service/login_service";
 import axios from "axios";
 
-const JoinPage = () => {
+const Join = () => {
   const router = useRouter();
   const [userId, onChangeUserId] = useInput();
   const [pw, onChangePw] = useInput();
@@ -73,4 +73,4 @@ const JoinPage = () => {
   );
 };
 
-export default JoinPage;
+export default Join;

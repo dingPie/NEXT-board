@@ -5,7 +5,7 @@ import InputText from "../hooks_components/InputText";
 import { ColBox, RowBox } from "../css_components/FlexBox";
 import Text from "../css_components/Text";
 
-interface ILoginComponent {
+interface LoginProps {
   userId: string;
   pw: string;
   isLoginConfirm: boolean;
@@ -18,7 +18,7 @@ interface ILoginComponent {
   onClickLoginBtn: (userId: string, pw: string) => void;
 }
 
-const LoginComponent = ({
+const Login = ({
   userId,
   pw,
   isLoginConfirm,
@@ -27,7 +27,7 @@ const LoginComponent = ({
   onChangePw,
   onClickJoinBtn,
   onClickLoginBtn,
-}: ILoginComponent) => {
+}: LoginProps) => {
   return (
     <>
       <ColBox padding="1rem">
@@ -85,4 +85,4 @@ const LoginComponent = ({
   );
 };
 
-export default LoginComponent;
+export default Login;

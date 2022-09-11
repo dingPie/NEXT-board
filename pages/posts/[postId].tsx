@@ -1,12 +1,12 @@
 import axios from "axios";
 import { GetStaticPropsContext } from "next";
-import DetailPostComponent from "../../components/posts/DetailPostComponent";
+import DetailPost from "../../components/posts/PostDetail";
 import { IPost } from "../../utils/types";
 
 const PostPage = ({ post }: { post: IPost }) => {
   return (
     <>
-      <DetailPostComponent post={post} />
+      <DetailPost post={post} />
     </>
   );
 };

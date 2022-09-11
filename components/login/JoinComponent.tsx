@@ -6,7 +6,7 @@ import { ColBox, RowBox } from "../css_components/FlexBox";
 import Text from "../css_components/Text";
 import { checkValidUserId } from "../../utils/service/login_service";
 
-interface IJoinPage {
+interface JoinProps {
   userId: string;
   pw: string;
   doublePw: string;
@@ -25,7 +25,7 @@ interface IJoinPage {
   onClickJoinBtn: (userId: string, pw: string) => void;
 }
 
-const JoinPage = ({
+const Join = ({
   userId,
   pw,
   doublePw,
@@ -38,7 +38,7 @@ const JoinPage = ({
   onClickCheckDuplicateId,
   onClickCancelBtn,
   onClickJoinBtn,
-}: IJoinPage) => {
+}: JoinProps) => {
   return (
     <>
       <ColBox padding="1rem">
@@ -129,4 +129,4 @@ const JoinPage = ({
   );
 };
 
-export default JoinPage;
+export default Join;

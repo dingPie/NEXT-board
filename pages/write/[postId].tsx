@@ -1,7 +1,7 @@
 import axios from "axios";
 import { GetStaticPropsContext } from "next";
 import { useRouter } from "next/router";
-import WriteComponent from "../../components/write/WriteComponent";
+import Write from "../../components/write/Write";
 import { IPost } from "../../utils/types";
 
 const EditPostPage = ({ post }: { post: IPost }) => {
@@ -10,7 +10,7 @@ const EditPostPage = ({ post }: { post: IPost }) => {
 
   return (
     <>
-      <WriteComponent editData={post} />
+      <Write editData={post} />
     </>
   );
 };

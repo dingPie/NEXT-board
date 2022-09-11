@@ -1,6 +1,6 @@
 import axios from "axios";
 import { GetStaticProps, InferGetStaticPropsType } from "next";
-import PostComponent from "../../components/posts/PostsComponent";
+import Posts from "../../components/posts/Posts";
 import { IPost } from "../../utils/types";
 import Text from "../../components/css_components/Text";
 import React from "react";
@@ -9,11 +9,9 @@ import router from "next/router";
 const PostsPage = ({
   posts,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  // 새로고침이벤트를 넣어줘야하나?
-
   return (
     <>
-      <PostComponent posts={posts} />
+      <Posts posts={posts} />
     </>
   );
 };

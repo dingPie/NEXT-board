@@ -6,11 +6,11 @@ import { ColBox, RowBox } from "../css_components/FlexBox";
 import { deletePost } from "../write/writeService";
 import PostCard from "./fragments/PostCard";
 
-interface IPostsComponent {
+interface PostsProps {
   posts: IPost[];
 }
 
-const PostsComponent = ({ posts }: IPostsComponent) => {
+const Posts = ({ posts }: PostsProps) => {
   const router = useRouter();
 
   const onClickPost = (post: IPost) => {
@@ -62,4 +62,4 @@ const PostsComponent = ({ posts }: IPostsComponent) => {
   );
 };
 
-export default PostsComponent;
+export default Posts;

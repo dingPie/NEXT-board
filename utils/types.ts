@@ -23,3 +23,6 @@ export interface LoginInputType {
   userId: string;
   pw: string;
 }
+export interface JoinInputType extends LoginInputType {
+  doublePw: string;
+}

@@ -24,7 +24,7 @@ const Login = () => {
     register,
     handleSubmit,
     setFocus,
-    formState: { errors, isValid, isDirty },
+    formState: { isValid },
   } = useForm<LoginInputType>({ mode: "onBlur" }); // 유효성 검사 모드, 현재 입력중인 input 창을 벗어나야 효력이 발생한다.
 
   const onClickJoinBtn = () => router.push("/login/join");

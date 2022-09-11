@@ -1,44 +1,84 @@
-import { ChangeEvent } from "react";
-import { Button } from "@mui/material";
+import { ChangeEvent, useEffect, useState } from "react";
+import { Button, TextField } from "@mui/material";
 import InputPw from "../hooks_components/InputPw";
 import InputText from "../hooks_components/InputText";
 import { ColBox, RowBox } from "../css_components/FlexBox";
 import Text from "../css_components/Text";
-import { checkValidUserId } from "../../utils/service/login_service";
+import {
+  checkValidPw,
+  checkValidUserId,
+  pwReg,
+  userIdReg,
+} from "../../utils/service/login_service";
+import { setLocalStorage } from "../../utils/service/local_service";
+import axios from "axios";
+import { useRouter } from "next/router";
+import useInput from "../../utils/hooks/useInput";
+import { useForm } from "react-hook-form";
+import { JoinInputType, LoginInputType } from "../../utils/types";
+import { boxShadow } from "../../styles/styleCss";
 
-interface JoinProps {
-  userId: string;
-  pw: string;
-  doublePw: string;
-  onChangeUserId: (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => void;
-  onChangePw: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
-  onChangeDoublePw: (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => void;
-  isValidUserId: boolean;
-  isValidPw: boolean;
-  isJoinConfirm: boolean;
-  onClickCheckDuplicateId: (userId: string) => void;
-  onClickCancelBtn: () => void;
-  onClickJoinBtn: (userId: string, pw: string) => void;
-}
+const Join = () => {
+  const router = useRouter();
+  const [isValidUserId, setIsValidUserId] = useState(false);
+  const [isValidPw, setIsValidPw] = useState(false);
+  const [isJoinConfirm, setIsJoinConfirm] = useState(false);
 
-const Join = ({
-  userId,
-  pw,
-  doublePw,
-  onChangeUserId,
-  onChangePw,
-  onChangeDoublePw,
-  isValidUserId,
-  isValidPw,
-  isJoinConfirm,
-  onClickCheckDuplicateId,
-  onClickCancelBtn,
-  onClickJoinBtn,
-}: JoinProps) => {
+  const {
+    register,
+    handleSubmit,
+    setFocus,
+    watch,
+    formState: { errors, isValid, dirtyFields },
+  } = useForm<JoinInputType>({ mode: "onChange" });
+
+  const userIdWatch = watch("userId");
+  const pwWatch = watch("pw");
+  const doublePwWatch = watch("doublePw");
+
+  const onClickCancelBtn = () => router.push("/login");
+
+  const onClickJoinBtn = handleSubmit(async (inputValue: LoginInputType) => {
+    const { userId, pw } = inputValue;
+    const body = {
+      userId: userId,
+      pw: pw,
+    };
+    await axios.post("/api/login/join", body);
+
+    setLocalStorage("uid", userId);
+    router.push("/posts");
+  });
+
+  const onClickCheckDuplicateId = async (userId: string) => {
+    const params = { userId: userId };
+    const res = await axios.get("/api/login/duplicateId", { params });
+    setIsValidUserId(res.data);
+  };
+
+  // 아이디 유효성 초기화
+  useEffect(() => {
+    setIsValidUserId(false);
+    console.log(userIdWatch);
+  }, [userIdWatch]);
+
+  // 가입 가능여부 disabled 상태 추적
+  useEffect(() => {
+    if (isValidUserId && isValidPw) setIsJoinConfirm(true);
+    else setIsJoinConfirm(false);
+  }, [isValidPw, userIdWatch]);
+
+  // 비밀번호 유효성검사
+  useEffect(() => {
+    if (
+      pwWatch === doublePwWatch &&
+      checkValidPw(pwWatch) &&
+      checkValidPw(doublePwWatch)
+    )
+      setIsValidPw(true);
+    else setIsValidPw(false);
+  }, [pwWatch, doublePwWatch]);
+
   return (
     <>
       <ColBox padding="1rem">
@@ -51,16 +91,17 @@ const Join = ({
             아이디
           </Text>
           <RowBox alignCenter>
-            <InputText
-              padding=".5rem"
-              shadow
-              value={userId}
-              onChange={onChangeUserId}
-              borderRadius={0.25}
+            <TextField
+              {...register("userId", { pattern: userIdReg, required: true })}
+              placeholder="6자 이상, 영어 및 숫자 포함 "
+              variant="outlined"
+              fullWidth
+              size="small"
+              style={{ boxShadow: boxShadow }}
             />
             <Button
-              onClick={() => onClickCheckDuplicateId(userId)}
-              disabled={!checkValidUserId(userId)}
+              onClick={() => onClickCheckDuplicateId(userIdWatch)}
+              disabled={!checkValidUserId(userIdWatch)}
               style={{ width: "8rem" }}
               variant="contained"
               color="primary"
@@ -69,9 +110,11 @@ const Join = ({
             </Button>
           </RowBox>
           <Text padding=".5rem 0">
-            {isValidUserId
+            {!userIdWatch?.length
+              ? ""
+              : isValidUserId
               ? "사용 가능한 아이디입니다."
-              : "중복된 아이디 입니다."}
+              : "아이디 확인이 필요합니다.."}
           </Text>
         </ColBox>
 
@@ -79,12 +122,14 @@ const Join = ({
           <Text fontSize="l" bold>
             비밀번호
           </Text>
-          <InputPw
-            padding=".5rem"
-            shadow
-            value={pw}
-            onChange={onChangePw}
-            borderRadius={0.25}
+
+          <TextField
+            type={"password"}
+            {...register("pw", { pattern: pwReg, required: true })}
+            variant="outlined"
+            fullWidth
+            size="small"
+            style={{ boxShadow: boxShadow }}
           />
         </ColBox>
 
@@ -92,14 +137,14 @@ const Join = ({
           <Text fontSize="l" bold>
             비밀번호 확인
           </Text>
-          <InputPw
-            padding=".5rem"
-            shadow
-            value={doublePw}
-            onChange={onChangeDoublePw}
-            borderRadius={0.25}
+          <TextField
+            type={"password"}
+            {...register("doublePw", { pattern: pwReg, required: true })}
+            variant="outlined"
+            fullWidth
+            size="small"
+            style={{ boxShadow: boxShadow }}
           />
-
           <Text padding=".5rem 0">
             {isValidPw
               ? "비밀번호가 일치합니다"
@@ -116,7 +161,7 @@ const Join = ({
             취소
           </Button>
           <Button
-            onClick={() => onClickJoinBtn(userId, pw)}
+            onClick={onClickJoinBtn}
             disabled={!isJoinConfirm}
             variant="contained"
             color="primary"

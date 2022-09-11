@@ -1,33 +1,63 @@
-import { ChangeEvent } from "react";
-import { Alert, Button } from "@mui/material";
-import InputPw from "../hooks_components/InputPw";
-import InputText from "../hooks_components/InputText";
+import { ChangeEvent, useEffect, useState } from "react";
+import { Alert, Button, TextField } from "@mui/material";
 import { ColBox, RowBox } from "../css_components/FlexBox";
 import Text from "../css_components/Text";
+import { useRouter } from "next/router";
+import useInput from "../../utils/hooks/useInput";
+import { setLocalStorage } from "../../utils/service/local_service";
+import {
+  checkValidPw,
+  checkValidUserId,
+  pwReg,
+  userIdReg,
+} from "../../utils/service/login_service";
+import axios from "axios";
+import { useForm } from "react-hook-form";
+import { LoginInputType } from "../../utils/types";
+import { boxShadow } from "../../styles/styleCss";
 
-interface LoginProps {
-  userId: string;
-  pw: string;
-  isLoginConfirm: boolean;
-  isWarnAlert: boolean;
-  onChangeUserId: (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => void;
-  onChangePw: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
-  onClickJoinBtn: () => void;
-  onClickLoginBtn: (userId: string, pw: string) => void;
-}
+const Login = () => {
+  const router = useRouter();
+  const [isWarnAlert, setIsWarnAlert] = useState(false);
 
-const Login = ({
-  userId,
-  pw,
-  isLoginConfirm,
-  isWarnAlert,
-  onChangeUserId,
-  onChangePw,
-  onClickJoinBtn,
-  onClickLoginBtn,
-}: LoginProps) => {
+  const {
+    register,
+    handleSubmit,
+    setFocus,
+    formState: { errors, isValid, isDirty },
+  } = useForm<LoginInputType>({ mode: "onBlur" }); // 유효성 검사 모드, 현재 입력중인 input 창을 벗어나야 효력이 발생한다.
+
+  const onClickJoinBtn = () => router.push("/login/join");
+
+  const onClickLoginBtn = handleSubmit(async (inputValue: LoginInputType) => {
+    const { userId, pw } = inputValue;
+    const body = {
+      userId: userId,
+      pw: pw,
+    };
+    const res = await axios.post("/api/login/getUser", body);
+
+    if (res.data) {
+      setLocalStorage("uid", userId);
+      router.replace("/posts");
+    } else {
+      setIsWarnAlert(true);
+    }
+  });
+
+  // 로그인 결과에 따른 알럿창 처리
+  useEffect(() => {
+    if (isWarnAlert) {
+      const time = setTimeout(() => setIsWarnAlert(false), 2000);
+      return () => {
+        clearTimeout(time);
+      };
+    }
+  }, [isWarnAlert]);
+
+  // id input창 focus
+  useEffect(() => setFocus("userId"), [isWarnAlert]);
+
   return (
     <>
       <ColBox padding="1rem">
@@ -39,12 +69,13 @@ const Login = ({
           <Text fontSize="l" bold>
             아이디
           </Text>
-          <InputText
-            shadow
-            padding=".5rem"
-            value={userId}
-            onChange={onChangeUserId}
-            borderRadius={0.25}
+
+          <TextField
+            {...register("userId", { pattern: userIdReg, required: true })}
+            variant="outlined"
+            fullWidth
+            size="small"
+            style={{ boxShadow: boxShadow }}
           />
         </ColBox>
 
@@ -52,19 +83,21 @@ const Login = ({
           <Text fontSize="l" bold>
             비밀번호
           </Text>
-          <InputPw
-            shadow
-            padding=".5rem"
-            value={pw}
-            onChange={onChangePw}
-            borderRadius={0.25}
+
+          <TextField
+            type={"password"}
+            {...register("pw", { pattern: pwReg, required: true })}
+            variant="outlined"
+            fullWidth
+            size="small"
+            style={{ boxShadow: boxShadow }}
           />
         </ColBox>
 
         <RowBox padding=".5rem 0">
           <Button
-            onClick={() => onClickLoginBtn(userId, pw)}
-            disabled={!isLoginConfirm}
+            onClick={onClickLoginBtn}
+            disabled={!isValid}
             variant="contained"
             color="primary"
           >
@@ -76,7 +109,11 @@ const Login = ({
         </RowBox>
 
         {isWarnAlert && (
-          <Alert variant="outlined" severity="warning">
+          <Alert
+            variant="outlined"
+            severity="error"
+            onClose={() => setIsWarnAlert(false)}
+          >
             아이디, 비밀번호가 잘못되었습니다.
           </Alert>
         )}

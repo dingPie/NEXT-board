@@ -1,7 +1,7 @@
 import axios from "axios";
-import { InputType } from "../../utils/types";
+import { PostInputType } from "../../utils/types";
 
-export const addPost = async (inputValue: InputType, uid: string) => {
+export const addPost = async (inputValue: PostInputType, uid: string) => {
   const body = {
     title: inputValue.title,
     content: inputValue.content,
@@ -10,7 +10,7 @@ export const addPost = async (inputValue: InputType, uid: string) => {
   await axios.post("/api/write", body);
 };
 
-export const editPost = async (inputValue: InputType, postId: string) => {
+export const editPost = async (inputValue: PostInputType, postId: string) => {
   const body = {
     title: inputValue.title,
     content: inputValue.content,

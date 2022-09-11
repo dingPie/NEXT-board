@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { getLocalStorage } from "../../utils/service/local_service";
-import { InputType, IPost } from "../../utils/types";
+import { PostInputType, IPost } from "../../utils/types";
 import { ColBox, RowBox } from "../css_components/FlexBox";
 import Text from "../css_components/Text";
 import { addPost, editPost } from "./writeService";
@@ -20,9 +20,9 @@ const WriteComponent = ({ editData }: WriteComponentProps) => {
     handleSubmit,
     setFocus,
     formState: { errors },
-  } = useForm<InputType>();
+  } = useForm<PostInputType>();
 
-  const onClickAddBtn = handleSubmit(async (inputValue: InputType) => {
+  const onClickAddBtn = handleSubmit(async (inputValue: PostInputType) => {
     const uid = getLocalStorage("uid");
     if (!uid) {
       // 이것도 ui 수정. toast나 alert이 필요함

@@ -115,3 +115,6 @@ export const setTextLine = css<{ whiteSpace?: string; lineClamp?: number }>`
   text-overflow: ellipsis;
   white-space: ${({ whiteSpace }) => (whiteSpace ? whiteSpace : "pre-wrap")};
 `;
+
+export const boxShadow =
+  "4px 4px 10px rgba(0, 0, 0, 0.1), -2px -2px 4px rgba(0, 0, 0, 0.05)";

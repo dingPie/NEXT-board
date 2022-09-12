@@ -8,19 +8,20 @@ import { IPost } from "../../../utils/types";
 import { ColBox, RowBox } from "../../css_components/FlexBox";
 import Text from "../../css_components/Text";
 import { toPostTime } from "../../../utils/time";
+import DeleteModal from "./DeleteModal";
 
 interface IPostCard {
   post: IPost;
   onClickPost: (post: IPost) => void;
-  onClickDeleteBtn: (e: MouseEvent<HTMLButtonElement>, post: IPost) => void;
   onClickEditBtn: (e: MouseEvent<HTMLButtonElement>, post: IPost) => void;
+  onClickDeleteBtn: (e: MouseEvent<HTMLButtonElement>, post: IPost) => void;
 }
 
 const PostCard = ({
   post,
   onClickPost,
-  onClickDeleteBtn,
   onClickEditBtn,
+  onClickDeleteBtn,
 }: IPostCard) => {
   const [userId, setUserId] = useState("");
 

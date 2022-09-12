@@ -1,7 +1,6 @@
 import { ChangeEvent, useEffect, useState } from "react";
 import { Button, TextField } from "@mui/material";
-import InputPw from "../hooks_components/InputPw";
-import InputText from "../hooks_components/InputText";
+
 import { ColBox, RowBox } from "../css_components/FlexBox";
 import Text from "../css_components/Text";
 import {
@@ -13,7 +12,7 @@ import {
 import { setLocalStorage } from "../../utils/service/local_service";
 import axios from "axios";
 import { useRouter } from "next/router";
-import useInput from "../../utils/hooks/useInput";
+
 import { useForm } from "react-hook-form";
 import { JoinInputType, LoginInputType } from "../../utils/types";
 import { boxShadow } from "../../styles/styleCss";

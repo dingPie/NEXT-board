@@ -1,9 +1,10 @@
-import WriteComponent from "../../components/write/WriteComponent";
+import { NextPage } from "next";
+import Write from "../../components/write/Write";
 
-const WritePage = () => {
+const WritePage: NextPage = () => {
   return (
     <>
-      <WriteComponent />
+      <Write />
     </>
   );
 };

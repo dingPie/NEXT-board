@@ -14,7 +14,15 @@ export interface IPost {
   thumbnail?: string;
 }
 
-export interface InputType {
+export interface PostInputType {
   title: string;
   content: string;
+}
+
+export interface LoginInputType {
+  userId: string;
+  pw: string;
+}
+export interface JoinInputType extends LoginInputType {
+  doublePw: string;
 }

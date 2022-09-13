@@ -2,17 +2,17 @@ import { Button, ButtonGroup } from "@mui/material";
 import { useRouter } from "next/router";
 import React, { MouseEvent } from "react";
 import styled from "styled-components";
-import { ColBox, RowBox } from "../../components/css_components/FlexBox";
-import Text from "../../components/css_components/Text";
+import { ColBox, RowBox } from "../css_components/FlexBox";
+import Text from "../css_components/Text";
 import { getLocalStorage } from "../../utils/service/local_service";
 import { toDetailTime } from "../../utils/time";
 import { IPost } from "../../utils/types";
 import { deletePost } from "../write/writeService";
 
-interface IDetailPostComponent {
+interface PostDetailProps {
   post: IPost;
 }
-const DetailPostComponent = ({ post }: IDetailPostComponent) => {
+const PostDetail = ({ post }: PostDetailProps) => {
   const { id, title, content, crtDate, favoriteCnt, writer } = post;
   const router = useRouter();
   const [userId, setUserId] = React.useState("");
@@ -76,7 +76,7 @@ const DetailPostComponent = ({ post }: IDetailPostComponent) => {
   );
 };
 
-export default DetailPostComponent;
+export default PostDetail;
 
 const WriterBtn = styled(Button)`
   padding: 0;

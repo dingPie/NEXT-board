@@ -5,10 +5,14 @@ import { IPost } from "../../utils/types";
 import Text from "../../components/css_components/Text";
 import React from "react";
 import router from "next/router";
+import { dehydrate, QueryClient, useQuery } from "react-query";
+import { QUERY_KEY } from "../../utils/const";
 
-const PostsPage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
-  posts,
-}) => {
+const PostsPage: NextPage<
+  InferGetStaticPropsType<typeof getStaticProps>
+> = () => {
+  const { data: posts } = useQuery(QUERY_KEY.GET_POSTS, getPosts);
+
   return (
     <>
       <Posts posts={posts} />
@@ -24,10 +28,11 @@ const getPosts = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const posts: Promise<IPost[]> = await getPosts(); // 바로 사용
+  const queryClient = new QueryClient();
+  await queryClient.prefetchQuery(QUERY_KEY.GET_POSTS, getPosts);
 
   return {
-    props: { posts },
+    props: { dehydratedState: dehydrate(queryClient) },
     revalidate: 5,
   };
 };
